@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    
+    
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Blocks</h3>
+
+            <div class="shadow rounded p-0">
+
+            <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Time </th>
+                                <th> Txns </th>
+                            </tr>
+                        </thead>
+
+                        {% for blk in latest_blocks %}
+                        <tr>
+                            <td>
+                                <a href="/block/{{ blk.number }}">{{ blk.number }}</a>
+                            </td>
+                            <td>
+                                {{ (current_time - blk.timestamp)|int }} seconds ago
+                            </td>
+                            <td>
+                                    {{ blk.transactions|length }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+
+                    <nav aria-label="Page navigation example" class="float-end p-2">
+                        <ul class="pagination">
+                            {% if next != 0 %}
+                                <li class="page-item"><a class="page-link" href="/?page=0"> << last </a></li>
+                            {% endif %}    
+                            
+                            {% if next or page ==1 %}
+                                <li class="page-item" ><a class="page-link" href="/?page={{next}}">{{next}}</a></li>
+                            {% endif %}    
+
+                            <li class="page-item active"><a class="page-link" href="" class="active"> {{page}}</a></li>
+                            
+                            {% if prev %}
+                                <li class="page-item"><a class="page-link" href="/?page={{prev}}"> {{prev}}</a></li>
+                            {% endif %}
+                            
+                            {% if first != page %}
+                                <li class="page-item"><a class="page-link" href="/?page={{first}}"> {{first}} first >>  </a></li>
+                            {% endif %}
+                        </ul>
+                    </nav> 
+                    <div style="clear:both;"></div>
+                </div>
+
+
+
+            
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Txns</h3>
+                {% for tx in latest_transactions %}
+                    {% include 'details/tx.html' %}
+                {% endfor %}
+            </table>
+            
+        </div>
+
+    </div>
+    
+</div>
+
+{% endblock %}

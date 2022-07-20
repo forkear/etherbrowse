@@ -1,0 +1,40 @@
+#header{
+    background-color: #712cf9;
+    background-image: url(../img/abstract-shapes-20.svg);
+}
+
+
+.bookm{
+    
+    position: relative;
+    padding-left: 1.15rem;
+    letter-spacing: .8px;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 27px;
+    color: #77838f;
+    /*background-color: rgba(119,131,143,.1);*/
+    background-color: rgba(36, 104, 173, 0.342);
+
+    font-size:1rem;
+    padding: 0.2rem 0.8rem 0.2rem 2rem;
+}
+
+.bookm::after{
+
+    
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 25px;
+    content: "";
+    border-top: 0.8rem solid transparent;
+    border-bottom: 0.8rem solid transparent;
+    border-left: 0.8rem solid #fff;
+
+}
+.tx-info{
+    border:1px solid #eeeeee;
+}

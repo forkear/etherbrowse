@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>etherbrowse</title>
+        <meta name="theme-color" content="#712cf9">
+        <meta charset="utf-8">
+        <meta name="description" content="Simple web app that use web3py -> for PoA private blockchain">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='bt5/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}" type="image/png"/>
+    </head>
+
+    <body>
+        
+
+        {% include 'header.html' %}
+
+        {% block content %} {% endblock %}
+
+        <script src="{{url_for('static', filename='js/popper.js')}}"></script>
+        <script src="{{url_for('static', filename='js/jquery-3.6.0.slim.min.js')}}"></script>
+        <script src="{{url_for('static', filename='bt5/js/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/base.js')}}"></script>
+    </body>
+</html>

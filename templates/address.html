@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Address {{ address }}</h3>
+    <p>{{ balance }} Ether</p>
+    <p>
+        {{balance|float}}
+    </p>
+</div>
+{% endblock %}

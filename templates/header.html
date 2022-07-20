@@ -1,0 +1,43 @@
+<div id="header">
+    <div class="container " >
+        <div class="row">
+            <div class="col-sm-12 p-4">
+                <a href="/" class="navbar-brand" style="color: white"><h1> etherbrowse </h1></a>
+                <form action='/search' method='GET'>
+                    <div class="input-group mb-3">
+                        <input name='query' 
+                        {% if query %}
+                            value='{{query}}'
+                        {% endif %}
+                        type="text" class="form-control col-6" id='id_search_term' aria-label="Text input with dropdown button" placeholder="0x..">
+                        <input type='submit' class="btn btn-primary"  value='Search' id="id_btn_search">
+                    </div>
+                </form>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                {% with block=get_last_block, msg='last' %}
+                    {% include "details/block.html" %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>

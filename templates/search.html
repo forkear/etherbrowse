@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    
+    
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Search results:</h3>
+            {% if block %}
+                {% with block=block  %}
+                    {% include "details/block.html" %}
+                {% endwith %}
+            {% endif %}
+            
+            {% if txn %}
+                {% with tx=txn  %}
+                   {% include "details/tx.html" %}
+                {% endwith %}
+            {% endif %}
+
+            {% if addr %}
+                {% with addr=addr  %}
+                   {% include "details/addr.html" %}
+                {% endwith %}
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
