@@ -10,7 +10,8 @@ Create an .env with:
 NODO_URL="[http/https]://[RPC-URL]"
 FLASK_APP=app 
 FLASK_ENV=development
-PREFIX_URL=/
+PREFIX_URL=
+
 
 
 
