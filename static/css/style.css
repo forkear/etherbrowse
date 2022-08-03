@@ -1,12 +1,12 @@
 body{
-    background-color: #eeeeee;
+    background-color: #ffffff;
 }
 
 .card, .table{
     background-color: #ffffff;
 }
 
-#header{
+.header{
     background-color: #712cf9;
     background-image: url(../img/abstract-shapes-20.svg);
 }
@@ -67,4 +67,11 @@ body{
     line-height: 1.5;
     color: #1e2022;
     text-align: left;
+}
+
+.hr-space{
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+    opacity: .75;
+    border-top: 1px solid #e7eaf3;
 }

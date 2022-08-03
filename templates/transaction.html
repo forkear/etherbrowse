@@ -4,9 +4,9 @@
 
 <div class="container mb-5">
 
-     <h3 class='text-break'> Transaction Details </h3>
+    <h3 class='text-break'> Transaction Details </h3>
 
-     <div class="card">
+    <div class="card">
         <div class="card-body">
 
             <div class="row mt-1 mb-4">
@@ -17,15 +17,17 @@
                     <span class="text-break">{{ tx.hash.hex() }}</span>
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     Status:
                 </div>
                 <div class="col-md-9">
-                    
+
                 </div>
             </div>
+
+            <hr class="hr-space mb-2">
 
 
             <div class="row mt-1 mb-4">
@@ -33,9 +35,13 @@
                     Block Number:
                 </div>
                 <div class="col-md-9">
-                    <a href="/block/{{ tx.blockNumber }}">{{ tx.blockNumber }}</a>
+                    <a href="{{ url_for('block', block_number=tx.blockNumber) }}">
+                        {{ tx.blockNumber }}
+                    </a>
                 </div>
             </div>
+
+            <hr class="hr-space mb-2">
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
@@ -45,7 +51,7 @@
                     <span class="text-break">{{ tx.blockHash.hex() }}</span>
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
 
 
             <div class="row mt-1 mb-4">
@@ -53,26 +59,29 @@
                     From:
                 </div>
                 <div class="col-md-9">
-                    <a href="/address/{{ tx.from }}">
+
+                    <a href="{{ url_for('address', addr=tx.from) }}">
                         <span class="text-break">{{ tx.from }}</span>
                     </a>
                 </div>
             </div>
+
+            <hr class="hr-space mb-2">
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     To:
                 </div>
                 <div class="col-md-9">
-                    <a href="/address/{{ tx.from }}">
+                    <a href="{{ url_for('address', addr=tx.to) }}">
                         <span class="text-break">{{ tx.to }}</span>
                     </a>
                 </div>
             </div>
 
+            <hr class="hr-space mb-2">
 
 
-            
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
@@ -83,7 +92,7 @@
                 </div>
             </div>
 
-
+            <hr class="hr-space mb-2">
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
@@ -93,7 +102,7 @@
                     <span class="badge  text-bg-light p-2">{{receipt.gasUsed }} Ether</span>
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
 
 
             <div class="row mt-1 mb-4">
@@ -105,7 +114,7 @@
                 </div>
             </div>
 
-
+            <hr class="hr-space mb-2">
 
 
 
@@ -117,58 +126,58 @@
                     <span class="badge  text-bg-light p-2"> {{ receipt.gasUsed * gas_price }} Ether </span>
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     Nonce:
                 </div>
                 <div class="col-md-9">
-                    
+
                     {{tx.nonce}}
-                    
+
                 </div>
             </div>
 
+            <hr class="hr-space mb-2">
 
-            
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     Transaction Index:
                 </div>
                 <div class="col-md-9">
-                    
+
                     {{tx.transactionIndex}}
-                    
+
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
 
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     Transaction Type:
                 </div>
                 <div class="col-md-9">
-                    
+
                     {{tx.type}}
-                    
+
                 </div>
             </div>
-
+            <hr class="hr-space mb-2">
             <div class="row mt-1 mb-4">
                 <div class="col-md-3 fw-bold  mb-1 mb-md-0">
                     Chain ID:
                 </div>
                 <div class="col-md-9">
-                    
+
                     {{tx.chainId}}
-                    
+
                 </div>
             </div>
 
 
-
+            <hr class="hr-space mb-2">
 
 
 
@@ -177,9 +186,11 @@
                     Input:
                 </div>
                 <div class="col-md-9">
-                    
-                    <textarea readonly="" spellcheck="false" class="form-control bg-light text-secondary text-monospace p-3" rows="2" id="inputdata">{{tx.input}}</textarea>
-                    
+
+                    <textarea readonly="" spellcheck="false"
+                        class="form-control bg-light text-secondary text-monospace p-3" rows="2"
+                        id="inputdata">{{tx.input}}</textarea>
+
                 </div>
             </div>
 

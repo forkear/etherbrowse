@@ -2,7 +2,7 @@
 <table class="table table-borderless m-0 p-0 mt-0">
 <tr class="p-0 mt-0">
     <td class="p-0 mt-0">
-        <a href="/transaction/{{ tx['hash'].hex() }}">
+        <a href="{{ url_for('transaction', hash=tx['hash'].hex()) }}">
         <svg class="bd-placeholder-img img-fluid rounded-start" width="64px" height="80px" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false">
             <rect width="100%" height="100%" fill="#868e96"></rect>
             <text x="35%" y="50%" fill="#dee2e6" dy=".3em">TX</text>
@@ -11,24 +11,27 @@
     </td>
     <td class="p-0 mt-0">
             <p  class="pt-3 mb-0">
-                Hash: <a href="/transaction/{{ tx['hash'].hex() }}">{{ tx['hash'].hex() | truncate(15, True, '...') }}</a>
+                
+                Hash: <a href="{{ url_for('transaction', hash=tx['hash'].hex()) }}">{{ tx['hash'].hex() | truncate(15, True, '...') }}</a>
                 <br>
-                Block: <a href="/block/{{ tx.blockNumber }}">{{ tx.blockNumber }}</a>
+                Block: <a href="{{ url_for('block', block_number=tx.blockNumber )}}"> {{ tx.blockNumber }}</a>
                 
             </p>
     </td>
     <td class="p-0 m-0">
         <p  class="pt-3 mb-0">
             <strong>From</strong>   
-            <a href="/address/{{ tx['from'] }}">
-                {{ tx['from'] | truncate(15, True, '...')   }}</a>
+            <a href="{{ url_for('address', addr=tx['from'] ) }}">
+                {{ tx['from'] | truncate(15, True, '...')   }}
+            </a>
         </p>
         
         {% if tx['to']  %}
             <p>
                 <strong>To</strong>
-                <a href="/address/{{ tx['from'] }}">
-                    {{ tx['to'] | truncate(15, True, '...')  }}</a>
+                <a href="{{ url_for('address', addr=tx['to'] ) }}">
+                    {{ tx['to'] | truncate(15, True, '...')  }}
+                </a>
             </p>
         {% endif %}
     </td >

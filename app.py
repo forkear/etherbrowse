@@ -5,13 +5,20 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 from forms import CodeForm, DeployForm
-
 load_dotenv()
 
 import services
 
+
 app = Flask(__name__, template_folder="templates")
-app.config['SECRET_KEY'] = 'somerandomstring'
+
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
+app.wsgi_app = DispatcherMiddleware(
+    Response('Not Found', status=404),
+    {os.getenv("PREFIX_URL"): app.wsgi_app}
+)
+
 
 service = services.MyService(url=os.getenv("NODO_URL"))
 
@@ -26,7 +33,7 @@ def get_last_block():
 def search():
     query = request.args.get('query',None)
     if not query:
-        return render_template('search.html', query=query, block=block, txn=txn)
+        redirect(url_for('index'))
 
     block = txn =  addr = None
 
@@ -40,11 +47,11 @@ def search():
     except:
         pass 
 
-
     try:
         addr =  service.get_addr(query)
     except:
         pass 
+
 
     return render_template('search.html', query=query, block=block, txn=txn, addr=addr)
     

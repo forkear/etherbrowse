@@ -2,16 +2,61 @@
 
 {% block content %}
 
+
+
+
+
+
 <div class="container">
     
     
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <h3>Blocks</h3>
 
             <div class="card shadow rounded">
+                <div class="card-body">
+                
+                
 
-            <table class="table table-bordered ">
+                <!-- As a heading -->
+                <nav class="navbar bg-light">
+                    <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Blocks</span>
+                    <ul class="pagination pt-2 pagination-sm">
+                        {% if next != 0 %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('index') }}?page=0"> 
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}    
+                        
+                        {% if next or page ==1 %}
+                            <li class="page-item" ><a class="page-link" href="{{ url_for('index') }}?page={{next}}">{{next}}</a></li>
+                        {% endif %}    
+
+                        <li class="page-item active"><a class="page-link" href="" class="active"> {{page}}</a></li>
+                        
+                        {% if prev %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for('index') }}?page={{prev}}"> {{prev}}</a></li>
+                        {% endif %}
+                        
+                        {% if first != page %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('index') }}?page={{first}}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                </div>
+
+
+                </nav>
+                
+                
+            <table class="table">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -23,7 +68,9 @@
                         {% for blk in latest_blocks %}
                         <tr>
                             <td>
-                                <a href="/block/{{ blk.number }}">{{ blk.number }}</a>
+                                <a href="{{ url_for('block', block_number=blk.number) }}">
+                                    {{ blk.number }}
+                                </a>
                             </td>
                             <td>
                                 {{ (current_time - blk.timestamp)|int }} seconds ago
@@ -36,32 +83,12 @@
 
                     </table>
 
-                    <nav aria-label="Page navigation example" class="float-end p-2">
-                        <ul class="pagination">
-                            {% if next != 0 %}
-                                <li class="page-item"><a class="page-link" href="/?page=0"> << last </a></li>
-                            {% endif %}    
-                            
-                            {% if next or page ==1 %}
-                                <li class="page-item" ><a class="page-link" href="/?page={{next}}">{{next}}</a></li>
-                            {% endif %}    
-
-                            <li class="page-item active"><a class="page-link" href="" class="active"> {{page}}</a></li>
-                            
-                            {% if prev %}
-                                <li class="page-item"><a class="page-link" href="/?page={{prev}}"> {{prev}}</a></li>
-                            {% endif %}
-                            
-                            {% if first != page %}
-                                <li class="page-item"><a class="page-link" href="/?page={{first}}"> {{first}} first >>  </a></li>
-                            {% endif %}
-                        </ul>
-                    </nav> 
-                    <div style="clear:both;"></div>
+                   
+                    
                 </div>
 
 
-
+            </div>
             
         </div>
 

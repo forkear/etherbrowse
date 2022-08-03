@@ -1,9 +1,9 @@
-<div id="header">
+<div class="header">
     <div class="container " >
         <div class="row">
             <div class="col-sm-12 p-4">
-                <a href="/" class="navbar-brand" style="color: white"><h1> etherbrowse </h1></a>
-                <form action='/search' method='GET'>
+                <a href="{{ url_for('index') }}" class="navbar-brand" style="color: white"><h1> etherbrowse </h1></a>
+                <form action="{{ url_for('search') }}" method='GET'>
                     <div class="input-group mb-3">
                         <input name='query' 
                         {% if query %}
@@ -18,14 +18,4 @@
 
         </div>
     </div>
-</div>
-
-<div class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 </div>
