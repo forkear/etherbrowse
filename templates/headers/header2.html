@@ -1,0 +1,15 @@
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-8">
+            {% with block=get_last_block, msg='last' %}
+                {% include "details/block.html" %}
+            {% endwith %}
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-2  pb-4">
+            <a href="/compiler" id="btn_compiler" class="btn btn-danger btn-lg"> Compile  contract </a>
+        </div>
+
+    </div>
+</div>
+

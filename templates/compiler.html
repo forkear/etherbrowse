@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% include 'headers/compiler.html' %}
+
+<div class="container mt-4">
+    
+    {% if error %}
+    <div class="mt-3 mb-3 error-output shadow-sm rounded" >
+        <pre class='error'>{{error}}</pre>
+    </div>
+    {% endif %}
+    {% if abi %}
+    <div class="mb-3">
+        <label for="id_bytecode">ABI</label>
+        <textarea class='form-control' row="4">{{abi}}</textarea>
+    </div>
+    {% endif %}
+
+    {% if bytecode %}
+    <div class="mb-3">
+        <label for="id_bytecode">ByteCode</label>
+        <textarea class='form-control' id='id_bytecode' row=5>{{bytecode}}</textarea>
+    </div>
+    {% endif %}
+    <form method="POST" class="form">
+
+        <label for="id_account">Account</label>
+        <div class="input-group mb-3 ">
+            <input type='text' id="id_account" class="form-control {% if form.errors.account %}is-invalid{% endif %}" name="account" value='{% if form.account.data %}{{form.account.data}}{% endif %}'>
+            <input type='button' class="enableEthereumButton btn btn-primary"  value='Connect Metamask' id="id_btn_from_metamask">
+
+            {% if form.errors.account %}
+                <div class="invalid-feedback">{{form.errors.account[0]}}</div>
+            {% endif %}
+ 
+          </div>
+          
+        <div class="mb-3">
+            <label for="id_code">Code</label>
+            
+            <textarea name="code" id="id_code"  rows="12" class="form-control  {% if form.errors.code %}is-invalid{% endif %}">{% if form.code.data %}{{form.code.data}}{% endif %}</textarea>
+            {% if form.errors.code %}
+                <div class="invalid-feedback">{{form.errors.code[0]}}</div>
+            {% endif %}
+            
+           
+          </div>
+          
+
+
+          
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Compilar</button>
+          </div>
+    </form>
+</div>
+{% endblock body %}
+
+
+
+
+{% block last_js %}
+
+<script type='text/javascript'>
+
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+
+    ethereumButton.addEventListener('click', () => {
+    getAccount();
+    });
+
+    async function getAccount() {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    var addr = document.getElementById('id_account')
+    addr.value = account;
+    }
+
+
+    ethereum.on('accountsChanged', function (accounts) {
+        alert('account change');
+    });
+    
+</script>
+
+{% endblock last_js %}

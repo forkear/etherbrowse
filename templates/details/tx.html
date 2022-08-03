@@ -10,21 +10,27 @@
         </a>
     </td>
     <td class="p-0 mt-0">
-            <p  class="pt-4 mb-0">
-                Hash:<a href="/transaction/{{ tx['hash'].hex() }}">{{ tx['hash'].hex() | truncate(15, True, '...') }}</a>
+            <p  class="pt-3 mb-0">
+                Hash: <a href="/transaction/{{ tx['hash'].hex() }}">{{ tx['hash'].hex() | truncate(15, True, '...') }}</a>
+                <br>
+                Block: <a href="/block/{{ tx.blockNumber }}">{{ tx.blockNumber }}</a>
+                
             </p>
     </td>
     <td class="p-0 m-0">
-        <p class="pt-2 mb-0">
+        <p  class="pt-3 mb-0">
             <strong>From</strong>   
             <a href="/address/{{ tx['from'] }}">
                 {{ tx['from'] | truncate(15, True, '...')   }}</a>
         </p>
-        <p>
-            <strong>To</strong>
-            <a href="/address/{{ tx['from'] }}">
-                {{ tx['to'] | truncate(15, True, '...')  }}</a>
-        </p>
+        
+        {% if tx['to']  %}
+            <p>
+                <strong>To</strong>
+                <a href="/address/{{ tx['from'] }}">
+                    {{ tx['to'] | truncate(15, True, '...')  }}</a>
+            </p>
+        {% endif %}
     </td >
     <td class="p-0 mt-0">
         {% with eth = tx['value'] / 1000000000000000000 %}

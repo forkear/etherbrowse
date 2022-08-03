@@ -1,3 +1,11 @@
+body{
+    background-color: #eeeeee;
+}
+
+.card, .table{
+    background-color: #ffffff;
+}
+
 #header{
     background-color: #712cf9;
     background-image: url(../img/abstract-shapes-20.svg);
@@ -37,4 +45,26 @@
 }
 .tx-info{
     border:1px solid #eeeeee;
+}
+
+.error-output{
+    border: 1px solid #eeeeee;
+    padding: 5px;
+    background-color: #e63689;
+    color: white;
+}
+
+#btn_compiler{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.container{
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1e2022;
+    text-align: left;
 }

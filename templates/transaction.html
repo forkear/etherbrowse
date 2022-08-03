@@ -2,54 +2,195 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    <h3> Transaction {{ tx.hash.hex() }}</h3>
+<div class="container mb-5">
 
-    <table class="table table-striped mt-4">
-        <tr>
-            <td>block number</td>
-            <td>
-                <a href="/block/{{ tx.blockNumber }}">{{ tx.blockNumber }}</a>
-            </td>
-        </tr>
-        <tr>
-            <td>from</td>
-            <td>
-                
-                <a href="/address/{{ tx.from }}">
-                    {{ tx.from }}
-                </a>
+     <h3 class='text-break'> Transaction Details </h3>
 
-            </td>
-        </tr>
-        <tr>
-            <td>to</td>
-            <td>
-                <a href="/address/{{ tx.to }}">
-                    {{ tx.to }}
-                </a>
-            </td>
+     <div class="card">
+        <div class="card-body">
 
-        </tr>
-        <tr>
-            <td>value</td>
-            <td>{{ value }} Ether</td>
-        </tr>
-        <tr>
-            <td>gas used</td>
-            <td>{{ receipt.gasUsed }}</td>
-        </tr>
-        <tr>
-            <td>gas price</td>
-            <td>{{ tx.gasPrice / 1000000000 }} Gwei</td>
-        </tr>
-        <tr>
-            <td>transaction fee</td>
-            <td>
-                {{ receipt.gasUsed * gas_price }} Ether 
-            </td>
-        </tr>
-    </table>
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Transaction Hash:
+                </div>
+                <div class="col-md-9">
+                    <span class="text-break">{{ tx.hash.hex() }}</span>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Status:
+                </div>
+                <div class="col-md-9">
+                    
+                </div>
+            </div>
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Block Number:
+                </div>
+                <div class="col-md-9">
+                    <a href="/block/{{ tx.blockNumber }}">{{ tx.blockNumber }}</a>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    blockHash:
+                </div>
+                <div class="col-md-9">
+                    <span class="text-break">{{ tx.blockHash.hex() }}</span>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    From:
+                </div>
+                <div class="col-md-9">
+                    <a href="/address/{{ tx.from }}">
+                        <span class="text-break">{{ tx.from }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    To:
+                </div>
+                <div class="col-md-9">
+                    <a href="/address/{{ tx.from }}">
+                        <span class="text-break">{{ tx.to }}</span>
+                    </a>
+                </div>
+            </div>
+
+
+
+            
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Value
+                </div>
+                <div class="col-md-9">
+                    <span class="badge  text-bg-light p-2">{{value}} Ether</span>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Gas used:
+                </div>
+                <div class="col-md-9">
+                    <span class="badge  text-bg-light p-2">{{receipt.gasUsed }} Ether</span>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Gas price:
+                </div>
+                <div class="col-md-9">
+                    <span class="badge  text-bg-light p-2"> {{ tx.gasPrice / 1000000000 }} Gwei </span>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Transaction fee:
+                </div>
+                <div class="col-md-9">
+                    <span class="badge  text-bg-light p-2"> {{ receipt.gasUsed * gas_price }} Ether </span>
+                </div>
+            </div>
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Nonce:
+                </div>
+                <div class="col-md-9">
+                    
+                    {{tx.nonce}}
+                    
+                </div>
+            </div>
+
+
+            
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Transaction Index:
+                </div>
+                <div class="col-md-9">
+                    
+                    {{tx.transactionIndex}}
+                    
+                </div>
+            </div>
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Transaction Type:
+                </div>
+                <div class="col-md-9">
+                    
+                    {{tx.type}}
+                    
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Chain ID:
+                </div>
+                <div class="col-md-9">
+                    
+                    {{tx.chainId}}
+                    
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Input:
+                </div>
+                <div class="col-md-9">
+                    
+                    <textarea readonly="" spellcheck="false" class="form-control bg-light text-secondary text-monospace p-3" rows="2" id="inputdata">{{tx.input}}</textarea>
+                    
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
 </div>
 
 {% endblock %}
