@@ -47,14 +47,14 @@
                 <p class="pt-1 mb-0">
                     <strong>From:</strong>
                     <a href="{{ url_for('address', addr=tx['from'] ) }}">
-                        {{ tx['from'] | truncate(15, True, '..') }}
+                        {{ tx['from'] | truncate(10, True, '..') }}
                     </a>
                 </p>
                 {% if tx['to'] %}
                 <p>
                     <strong>To:</strong>
                     <a href="{{ url_for('address', addr=tx['to'] ) }}">
-                        {{ tx['to'] | truncate(15, True, '..') }}
+                        {{ tx['to'] | truncate(10, True, '..') }}
                     </a>
                 </p>
                 {% endif %}
@@ -67,7 +67,7 @@
 
                         Contract Address:</strong>
                     <a href="{{ url_for('address', addr=receipt.contractAddress ) }}">
-                        {{ receipt.contractAddress | truncate(15, True, '..') }}
+                        {{ receipt.contractAddress | truncate(10, True, '..') }}
                     </a>
                 </p>
 
