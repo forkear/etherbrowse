@@ -31,6 +31,13 @@ def get_last_block():
 
 
 
+@app.route("/sw.js")
+def sw():
+    swjs = render_template('sw.js')
+    return Response(response=swjs, status=200, mimetype='text/javascript')
+
+
+
 @app.route("/")
 def index():
 

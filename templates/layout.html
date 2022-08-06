@@ -4,10 +4,15 @@
         <title>etherbrowse</title>
         <meta name="theme-color" content="#712cf9">
         <meta charset="utf-8">
+        <link rel="manifest" href="{{url_for('static', filename='manifest.webmanifest')}}">
+
+        <link rel="apple-touch-icon" href="{{url_for('static', filename='icons/icon-192x192.png')}}">
+        <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}" type="image/png"/>
+
         <meta name="description" content="Simple web app that use web3py -> for PoA private blockchain">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{url_for('static', filename='bt5/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}" type="image/png"/>
+        
         <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-icons-1.9.1/bootstrap-icons.css')}}">
     </head>
@@ -30,6 +35,23 @@
         <script src="{{url_for('static', filename='js/jquery-3.6.0.slim.min.js')}}"></script>
         <script src="{{url_for('static', filename='bt5/js/bootstrap.min.js')}}"></script>
         <script src="{{url_for('static', filename='js/base.js')}}"></script>
+
+        <script type="text/javascript">
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('{{ url_for('sw') }}')
+                    .then(function(registration) {
+                        console.log(registration.scope);
+                        console.log(registration.scope);
+                      console.log('ServiceWorker registration successful with    scope: ', registration.scope);
+                    }).catch(function(err) {
+                      console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+              }
+        </script>
+
 
         {% block last_js %}
         {% endblock %}
