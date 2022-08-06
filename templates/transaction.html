@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{{receipt}}
 <div class="container mb-5">
 
     <h3 class='text-break'> Transaction Details </h3>
@@ -23,11 +24,30 @@
                     Status:
                 </div>
                 <div class="col-md-9">
+                    {{receipt.status}}
+                </div>
+            </div>
+
+            <hr class="hr-space mb-2">
+
+            {% if receipt.contractAddress %}
+            
+            <div class="row mt-1 mb-4">
+                <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                    Contract Address:
+                </div>
+                <div class="col-md-9">
+                    <a href="{{ url_for('address', addr=receipt.contractAddress)}}">
+                        <span class="text-break">{{ receipt.contractAddress  }}</span>
+                    </a>
 
                 </div>
             </div>
 
             <hr class="hr-space mb-2">
+
+            {% endif %}
+
 
 
             <div class="row mt-1 mb-4">

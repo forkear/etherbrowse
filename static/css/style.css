@@ -1,5 +1,7 @@
 body{
     background-color: #ffffff;
+    height: 100%;
+    margin-bottom: 200px;
 }
 
 .card, .table{
@@ -9,6 +11,14 @@ body{
 .header{
     background-color: #712cf9;
     background-image: url(../img/abstract-shapes-20.svg);
+    /*box-shadow: 0px 1px 10px #555555;*/
+}
+
+#hd_search{
+    background-color: #712cf9;
+    background-image: url(../img/abstract-shapes-20.svg);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 

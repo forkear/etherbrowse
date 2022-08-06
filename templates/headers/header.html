@@ -1,21 +1,53 @@
-<div class="header">
-    <div class="container " >
-        <div class="row">
-            <div class="col-sm-12 p-4">
-                <a href="{{ url_for('index') }}" class="navbar-brand" style="color: white"><h1> etherbrowse </h1></a>
-                <form action="{{ url_for('search') }}" method='GET'>
-                    <div class="input-group mb-3">
-                        <input name='query' 
-                        {% if query %}
-                            value='{{query}}'
-                        {% endif %}
-                        type="text" class="form-control col-6" id='id_search_term' aria-label="Text input with dropdown button" placeholder="0x..">
-                        <input type='submit' class="btn btn-primary"  value='Search' id="id_btn_search">
-                    </div>
-                </form>
-                
-            </div>
+<nav class="navbar navbar-expand-lg header navbar-dark">
+    <div class="container-fluid">
 
+        <a class="navbar-brand p-2" href="{{ url_for('index') }}"> 
+          <i class="bi bi-journals"></i>
+
+           Etherbrowse</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ">
+                <a class="nav-link " aria-current="page" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('compiler') }}">Compiler</a>
+                {% with block=get_last_block, msg='last' %}
+                <a href="{{ url_for('block', block_number=block.number) }}" class="nav-link">
+                    Last block: #{{block.number}}
+                </a>
+                {% endwith %}
+            </div>
         </div>
+
+    </div>
+</nav>
+
+<div class="container-fluid" id="hd_search">
+    <div class="row">
+    <form action="{{ url_for('search') }}" class="" method='GET' role="search">
+        <div class="input-group ">
+            <input name='query' {% if query %} value='{{query}}' {% endif %} type="text" class="form-control col-6"
+                id='id_search_term' aria-label="Text input with dropdown button"
+                placeholder="Search by Address / Txhash / Block / Token / Ens">
+            <input type='submit' class="btn btn-primary" value='Search' id="id_btn_search">
+        </div>
+    </form>
     </div>
 </div>
+
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}

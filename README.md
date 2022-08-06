@@ -11,7 +11,8 @@ NODO_URL="[http/https]://[RPC-URL]"
 FLASK_APP=app 
 FLASK_ENV=development
 PREFIX_URL=
-
+SECRET_KEY='.....'
+USE_COMPILER=yes/no
 
 
 

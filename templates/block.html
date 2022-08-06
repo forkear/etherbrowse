@@ -1,122 +1,218 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
 <div class="container">
-<div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12">
-        <h3>Block {{block.number}}</h3>
-        <div class="shadow rounded p-0">
 
-        <table class="table table-bordered ">
-                
-            <table class="table table-striped mt-4">
-              
-                <tr>
-                    <td colspan="2">
-                        <strong>Hash: </strong> {{ block.hash.hex() }}
-                    </td>
-                </tr>
 
-                <tr>
-                    <td colspan="2">
-                        <strong> parentHash: </strong>{{ block.parentHash.hex() }}
-                    </td>
-                </tr>
+    <div class="row">
 
-                <tr>
-                    <td colspan="2">
-                        <strong> parentHash: </strong>{{ block.parentHash.hex() }}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <strong> receiptsRoot: </strong>{{ block.receiptsRoot.hex() }}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <strong>sha3Uncles:</strong> {{ block.sha3Uncles.hex() }}
-                    </td>
-                </tr>
+        <div class="col-lg-6 col-md-6 col-sm-12">
 
                 
+        <h3 class='text-break'> Block {{block.number}}</h3>
+
+        <div class="card">
+            
+            <a href="#txns"> 
+                <span class="bookm float-end">
+                    {{ block.transactions|length }} txns
+                </span>
+            </a>
+            
+            <div class="card-body">
+            
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Hash:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break">{{ block.hash.hex() }}</span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Parent Hash:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break">{{ block.parentHash.hex() }}</span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        receiptsRoot:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break">{{ block.receiptsRoot.hex() }}</span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        sha3Uncles:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.sha3Uncles.hex() }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        TimeStamp:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{  block.timestamp  }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Date Time:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ datetime_block_str }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Transactions:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.transactions|length }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Size:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.size}} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Gas Limit:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.gasLimit }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Gas Used:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.gasUsed }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Base Fee Per Gas:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.baseFeePerGas }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Difficulty:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.difficulty }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
+
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Total Difficulty:
+                    </div>
+                    <div class="col-md-9">
+                        <span class="text-break"> {{ block.totalDifficulty }} </span>
+                    </div>
+                </div>
+
+                <hr class="hr-space mb-2">
+
 
 
                 
 
-              
-                <tr>
-                    <td><strong>Timestamp</strong></td>
-                    <td>
-                        {{ block.timestamp }}
-                    </td>
-                </tr>
+                <div class="row mt-1 mb-4">
+                    <div class="col-md-3 fw-bold  mb-1 mb-md-0">
+                        Proof Of Authority Data:
+                    </div>
+                    <div class="col-md-9">
 
-                <tr>
-                    <td><strong>Date Time</strong></td>
-                    <td>
-                        {{ datetime_block_str }}
-                    </td>
-                </tr>
+                        <textarea readonly="" spellcheck="false"
+                            class="form-control bg-light text-secondary text-monospace p-3" rows="2"
+                            id="inputdata">{{block.proofOfAuthorityData.hex()}}</textarea>
 
-                <tr>
-                    <td><strong> Transactions </strong></td>
-                    <td>{{ block.transactions|length }} transactions</a></td>
-                </tr>
-                <tr>
-                    <td><strong> Size </strong></td>
-                    <td>{{ block.size }}</td>
-                </tr>
-                <tr>
-                    <td><strong>  Gas Limit </strong> </td>
-                    <td>{{ block.gasLimit }}</td>
-                </tr>
-                <tr>
-                    <td><strong>  Gas Used </strong> </td>
-                    <td>{{ block.gasUsed }}</td>
-                </tr>
-                <tr>
-                    <td><strong> Base Fee Per Gas </strong> </td>
-                    <td>{{ block.baseFeePerGas }}</td>
-                </tr>
-                <tr>
-                    <td><strong> Difficulty </strong> </td>
-                    <td>{{ block.difficulty }}</td>
-                </tr>
-                <tr>
-                    <td><strong> Total Difficulty </strong> </td>
-                    <td>{{ block.totalDifficulty }}</td>
-                </tr>
+                    </div>
+                </div>
 
-                <tr>
-                    <td><strong> Proof Of Authority Data </strong> </td>
-                    <td>
-                        <p style='word-break: break-all;'>
-                        {{ block.proofOfAuthorityData.hex() }}
-                        </p>
-                    </td>
-                </tr>
-                
+
+
+        </div>
+    </div>
+</div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h3>Txns</h3>
+                {% for tx, receipt in txns %}
+                    {% include 'details/tx.html' %}
+                {% endfor %}
             </table>
         </div>
-    </div>
-
-
-
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-        <h3>Txns</h3>
-            {% for tx in txns %}
-                {% include 'details/tx.html' %}
-            {% endfor %}
-        </table>
         
     </div>
-    
-        </div>
-    </div>
+</div>
 
     
     

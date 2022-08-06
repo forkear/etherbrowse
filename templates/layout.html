@@ -9,60 +9,15 @@
         <link href="{{url_for('static', filename='bt5/css/bootstrap.min.css')}}" rel="stylesheet">
         <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}" type="image/png"/>
         <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-icons-1.9.1/bootstrap-icons.css')}}">
     </head>
 
     <body>
-        
+
         {% block body %}
-        
-        <nav class="navbar navbar-expand-lg header navbar-dark">
-            <div class="container-fluid">
 
-              <a class="navbar-brand p-2" href="{{ url_for('index') }}">Etherbrowse</a>
-              
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-                  
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup" rol="search">
-                <div class="navbar-nav ">
-                  <a class="nav-link " aria-current="page" href="{{ url_for('index') }}">Home</a>
-                  <a class="nav-link" href="{{ url_for('compiler') }}">Compiler</a>
-                </div>
-              
-
-        </div>
-
-        <form  action="{{ url_for('search') }}" class="d-flex float-end" method='GET' role="search">
-            <div class="input-group ">
-                <input name='query' 
-                {% if query %}
-                    value='{{query}}'
-                {% endif %}
-                type="text" class="form-control col-6" id='id_search_term' aria-label="Text input with dropdown button" placeholder="Search by Address / Txhash / Block / Token / Ens">
-                <input type='submit' class="btn btn-primary"  value='Search' id="id_btn_search">
-            </div>
-        </form>
-
-
-            </div>
-          </nav>
-
-
-        
-
-        <div class="container">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div>
-        
-        {% include 'headers/header2.html' %}
-        
+       
+        {% include 'headers/header.html' %}
         
         
 

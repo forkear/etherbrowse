@@ -29,7 +29,8 @@ class MyService():
         for block in blocks:
             for tx in block.transactions:
                     transaction = self.get_transaction(tx)
-                    transactions.append(transaction)
+                    receipt = self.w3.eth.get_transaction_receipt(tx)
+                    transactions.append((transaction,receipt))
         
         return transactions
 

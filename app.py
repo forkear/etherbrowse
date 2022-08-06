@@ -1,26 +1,28 @@
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
 from xmlrpc.client import DateTime
 import time
 from flask import Flask, render_template, request, flash, redirect, url_for
 import os
 from datetime import datetime
-from dotenv import load_dotenv
-from forms import CodeForm, DeployForm
-load_dotenv()
-
+from forms import CodeForm
+from solcx import compile_source
+import config 
 import services
+from decorators import use_compiler_or_redirect
 
 
 app = Flask(__name__, template_folder="templates")
 
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from werkzeug.wrappers import Response
 app.wsgi_app = DispatcherMiddleware(
     Response('Not Found', status=404),
-    {os.getenv("PREFIX_URL"): app.wsgi_app}
+    {
+        config.PREFIX_URL: app.wsgi_app
+    }
 )
 
 
-service = services.MyService(url=os.getenv("NODO_URL"))
+service = services.MyService(url=config.NODE_URL)
 
 
 @app.context_processor
@@ -29,39 +31,15 @@ def get_last_block():
 
 
 
-@app.route("/search")
-def search():
-    query = request.args.get('query',None)
-    if not query:
-        redirect(url_for('index'))
-
-    block = txn =  addr = None
-
-    try:
-        block = service.get_block(int(query))
-    except:
-        pass 
-
-    try:
-        txn = service.w3.eth.get_transaction(query)
-    except:
-        pass 
-
-    try:
-        addr =  service.get_addr(query)
-    except:
-        pass 
-
-
-    return render_template('search.html', query=query, block=block, txn=txn, addr=addr)
-    
-
-
 @app.route("/")
 def index():
 
-    page = int(request.args.get('page', '0'))
-    
+    try:
+        page = int(request.args.get('page', '0'))
+    except:
+        page = 0
+     
+
     page, prev, next, last, first, latest_blocks = service.get_blocks(page)
 
     latest_transactions = service.get_transactions_from_blocks(latest_blocks)
@@ -109,16 +87,48 @@ def transaction(hash):
 
 
 
+
+@app.route("/search")
+def search():
+    query = request.args.get('query',None)
+
+    if not query:
+        redirect(url_for('index'))
+
+    block = txn =  addr = None
+
+    try:
+        block = service.get_block(int(query))
+    except:
+        pass
+
+    try:
+        txn = service.w3.eth.get_transaction(query)
+    except:
+        pass 
+
+    try:
+        addr =  service.get_addr(query)
+    except:
+        pass 
+
+
+    return render_template('search.html', query=query, block=block, txn=txn, addr=addr)
+    
+
+
+
 """
 https://web3py.readthedocs.io/en/latest/contracts.html
 >>> from solcx import install_solc
 >>> install_solc(version='latest')
 """
 
-from solcx import compile_source
 
 @app.route('/compiler', methods=['GET', 'POST'])
+@use_compiler_or_redirect
 def compiler():
+
     bytecode =''
     abi = ''
     error = ''
@@ -149,34 +159,5 @@ def compiler():
     return render_template('compiler.html', form=form, bytecode=bytecode, abi=abi, error=error)
 
 
-@app.route('/compiler/deploy', methods=['GET', 'POST'])
-def deploy_contract():
-    form = DeployForm(request.form)
-    if request.method == 'POST' and form.validate():
-        pass
-
-        
-    return render_template('deploy.html')
-    
-    
-
-
-"""
-DEPLOY
-# web3.py instance
->>> w3 = Web3(Web3.EthereumTesterProvider())
-
-# set pre-funded account as sender
->>> w3.eth.default_account = w3.eth.accounts[0]
-
->>> Greeter = w3.eth.contract(abi=abi, bytecode=bytecode)
-
-# Submit the transaction that deploys the contract
->>> tx_hash = Greeter.constructor().transact()
-
-# Wait for the transaction to be mined, and get the transaction receipt
-
-
-"""
 if __name__ == "__main__":
     app.run()
