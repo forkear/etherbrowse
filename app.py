@@ -36,9 +36,9 @@ def sw():
     swjs = render_template('sw.js')
     return Response(response=swjs, status=200, mimetype='text/javascript')
 
-@app.route("/manifest.webmanifest")
+@app.route("/manifest.webmanifest") 
 def manifest():
-    swjs = render_template('manifest.webmanifest', scope=config.PREFIX_URL, start_url=config.PREFIX_URL, static=url_for('static', filename=''))
+    swjs = render_template('manifest.webmanifest', scope=config.PREFIX_URL+'/', start_url=config.PREFIX_URL+'/', static=url_for('static', filename=''))
     return Response(response=swjs, status=200, mimetype='text/javascript')
 
 
